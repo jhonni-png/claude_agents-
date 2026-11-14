@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "red-agentes": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "http://localhost:5678/mcp/red-agentes/sse",
+        "--allow-http",
+        "--transport",
+        "sse-only"
+      ]
+    }
+  }
+}
