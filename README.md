@@ -2,6 +2,23 @@
 
 Cuatro agentes (Planificador, Arquitecto, Constructor y Auditor QA) montados en un solo workflow de n8n y expuestos como herramientas MCP. Claude orquesta la cadena: llama a cada agente en orden y le pasa el resultado del anterior. Todo con herramientas gratuitas (n8n local + Gemini de Google AI Studio).
 
+> **Repositorio complementario:** [**oficina-de-agentes-**](https://github.com/jhonni-png/oficina-de-agentes-) es una oficina 3D que visualiza en tiempo real a estos mismos cuatro agentes (Three.js + Supabase Realtime).
+
+## Estructura
+
+```
+claude_agents-/
+├── config/
+│   └── claude_desktop_config.example.json  # Ejemplo de conexión MCP para Claude Desktop
+├── docs/
+│   └── prueba-cadena.md                    # Resultado de la prueba de la cadena de agentes
+├── examples/
+│   └── renombrador/                        # Script generado por la cadena durante la prueba
+├── LICENSE                                 # MIT
+├── .gitignore
+└── README.md
+```
+
 ## Arquitectura
 
 - **Un workflow de n8n** con un nodo *MCP Server Trigger* (path `red-agentes`), cuatro nodos *AI Agent Tool* con su System Message en español y un nodo *Gemini Chat Model* compartido.
@@ -17,7 +34,7 @@ Cuatro agentes (Planificador, Arquitecto, Constructor y Auditor QA) montados en 
 
 ## Configuración de Claude Desktop
 
-Añade el servidor a `claude_desktop_config.json` (Settings → Developer → Edit Config). Hay un ejemplo en [`claude_desktop_config.example.json`](claude_desktop_config.example.json). Luego cierra Claude Desktop por completo (también desde la bandeja del sistema) y ábrelo de nuevo.
+Añade el servidor a `claude_desktop_config.json` (Settings → Developer → Edit Config). Hay un ejemplo en [`config/claude_desktop_config.example.json`](config/claude_desktop_config.example.json). Luego cierra Claude Desktop por completo (también desde la bandeja del sistema) y ábrelo de nuevo.
 
 Si al abrir `http://localhost:5678/mcp/red-agentes` n8n responde 404 de "webhook no registrado" para GET y POST, esa ruta base no es el endpoint de conexión. Usa la ruta con `/sse` y `--transport sse-only`, como en el ejemplo. Comprueba siempre la *Production URL* que muestra el nodo MCP Server Trigger.
 
@@ -39,3 +56,7 @@ El resultado está resumido en [`docs/prueba-cadena.md`](docs/prueba-cadena.md) 
 - La cuota gratuita de Gemini puede dar errores 429 con cadenas de cuatro agentes.
 - El auditor puede afirmar cosas sobre el código que no están en él. Conviene pedirle en su System Message que cite la línea exacta de cada hallazgo.
 - Para usar la red desde el celular hace falta un conector remoto con URL pública HTTPS (por ejemplo, un túnel de Cloudflare), con autenticación en el MCP Server Trigger. Depende del plan de Claude.
+
+## Licencia
+
+Distribuido bajo licencia [MIT](LICENSE).
