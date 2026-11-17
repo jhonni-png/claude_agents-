@@ -3,6 +3,8 @@
 Cuatro agentes (Planificador, Arquitecto, Constructor y Auditor QA) montados en un solo workflow de n8n y expuestos como herramientas MCP. Claude orquesta la cadena: llama a cada agente en orden y le pasa el resultado del anterior. Todo con herramientas gratuitas (n8n local + Gemini de Google AI Studio).
 
 > **Repositorio complementario:** [**oficina-de-agentes-**](https://github.com/jhonni-png/oficina-de-agentes-) es una oficina 3D que visualiza en tiempo real a estos mismos cuatro agentes (Three.js + Supabase Realtime).
+>
+> **Misma red de agentes, otra vía:** [**opencode-pipeline**](https://github.com/jhonni-png/opencode-pipeline) ejecuta los cuatro agentes con OpenCode y modelos gratuitos, sin n8n.
 
 ## Estructura
 
